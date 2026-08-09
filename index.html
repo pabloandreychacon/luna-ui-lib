@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luna UI Lib Example</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <script type="module" src="./src/index.ts"></script>
+    <style>
+        body { padding: 2rem; }
+        section { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--pico-muted-border-color); }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Luna UI Lib Examples</h1>
+
+        <section>
+            <h2>Data Table</h2>
+            <ui-datatable></ui-datatable>
+        </section>
+
+        <section>
+            <h2>Multiselect</h2>
+            <ui-multiselect></ui-multiselect>
+        </section>
+
+        <section>
+            <h2>Spinner</h2>
+            <ui-spinner></ui-spinner>
+        </section>
+
+        <section>
+            <h2>Floating Action Button (FAB)</h2>
+            <ui-fab icon="+" position="bottom-right"></ui-fab>
+        </section>
+        
+        <section>
+            <p>Note: <code>ui-toast</code> and <code>ui-popconfirm</code> typically require imperative invocation via their APIs.</p>
+        </section>
+    </main>
+</body>
+</html>
