@@ -1,15 +1,25 @@
 {
-  "name": "luna-ui-lib",
-  "version": "1.0.0",
+  "name": "luna-ui-lib-pablo-demo",
+  "version": "1.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/luna-ui-lib.umd.js",
+  "module": "dist/luna-ui-lib.mjs",
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "vite build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "ui",
+    "components",
+    "web-components",
+    "luna"
+  ],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
     "tslib": "^2.8.1",
     "typescript": "^7.0.2",

@@ -6,7 +6,8 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'LunaUILib',
-      fileName: 'luna-ui-lib'
+      fileName: 'luna-ui-lib',
+      formats: ['es', 'umd']
     },
     rollupOptions: {
       // Ensure we don't bundle dependencies that the user should provide

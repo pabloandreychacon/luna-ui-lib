@@ -38,3 +38,11 @@ Since it relies on Pico CSS, ensure it's installed:
 ```bash
 npm install @picocss/pico
 ```
+
+## Example
+
+Check out the [example.html](./example.html) to see the components in action. Simply open it in your browser or serve it using Vite:
+
+```bash
+npx vite
+```
