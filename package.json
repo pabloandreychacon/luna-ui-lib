@@ -1,9 +1,9 @@
 {
   "name": "luna-ui-lib-pablo-demo",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "",
-  "main": "dist/luna-ui-lib.umd.js",
-  "module": "dist/luna-ui-lib.mjs",
+  "main": "dist/luna-ui-lib.umd.cjs",
+  "module": "dist/luna-ui-lib.js",
   "files": [
     "dist"
   ],
