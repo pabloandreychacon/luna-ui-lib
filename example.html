@@ -5,39 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luna UI Lib Example</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-    <script type="module" src="./src/index.ts"></script>
     <style>
         body { padding: 2rem; }
         section { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--pico-muted-border-color); }
+        .spinner-container { position: relative; height: 100px; background: var(--pico-form-element-background-color); border-radius: 8px; margin-top: 1rem;}
+        ui-spinner.demo-spinner { position: absolute; }
     </style>
 </head>
 <body>
     <main class="container">
         <h1>Luna UI Lib Examples</h1>
-
         <section>
             <h2>Data Table</h2>
-            <ui-datatable></ui-datatable>
+            <ui-datatable id="demo-datatable"></ui-datatable>
         </section>
-
         <section>
             <h2>Multiselect</h2>
-            <ui-multiselect></ui-multiselect>
+            <ui-multiselect id="demo-multiselect" options='["Option 1", "Option 2", "Option 3"]'></ui-multiselect>
         </section>
-
         <section>
             <h2>Spinner</h2>
-            <ui-spinner></ui-spinner>
+            <p>Click the button to toggle the spinner below.</p>
+            <button id="toggle-spinner">Toggle Spinner</button>
+            <div class="spinner-container">
+                <ui-spinner id="demo-spinner" class="demo-spinner" visible></ui-spinner>
+            </div>
         </section>
-
         <section>
             <h2>Floating Action Button (FAB)</h2>
             <ui-fab icon="+" position="bottom-right"></ui-fab>
         </section>
-        
         <section>
-            <p>Note: <code>ui-toast</code> and <code>ui-popconfirm</code> typically require imperative invocation via their APIs.</p>
+            <h2>Toast & Popconfirm</h2>
+            <button id="btn-toast">Show Toast</button>
+            <button id="btn-popconfirm" data-confirm="Are you sure you want to proceed?">Show Popconfirm</button>
         </section>
     </main>
+    <ui-toast id="demo-toast"></ui-toast>
+    <script type="module">
+        import { showPopconfirm } from './src/index.ts';
+        import './src/index.ts';
+        // DataTable init
+        customElements.whenDefined('ui-datatable').then(() => {
+            const dt = document.getElementById('demo-datatable');
+            if (dt && typeof dt.setOptions === 'function') {
+                dt.setOptions({
+                    columns: [
+                        { key: 'id', label: 'ID' },
+                        { key: 'name', label: 'Name' },
+                        { key: 'role', label: 'Role' }
+                    ],
+                    actions: [{ label: 'Edit', className: 'secondary' }]
+                });
+                dt.setData([
+                    { id: 1, name: 'Alice', role: 'Admin' },
+                    { id: 2, name: 'Bob', role: 'User' },
+                    { id: 3, name: 'Charlie', role: 'Moderator' }
+                ]);
+            }
+        });
+        // Spinner toggle
+        customElements.whenDefined('ui-spinner').then(() => {
+            const spinner = document.getElementById('demo-spinner');
+            const btn = document.getElementById('toggle-spinner');
+            btn.addEventListener('click', () => {
+                if (spinner.hasAttribute('visible')) spinner.hide();
+                else spinner.show();
+            });
+        });
+        // Toast & Popconfirm
+        customElements.whenDefined('ui-toast').then(() => {
+            const toast = document.getElementById('demo-toast');
+            document.getElementById('btn-toast').addEventListener('click', () => {
+                if (toast && typeof toast.show === 'function') {
+                    toast.show('Hello! This is a toast notification.', 'success');
+                }
+            });
+            document.getElementById('btn-popconfirm').addEventListener('click', (e) => {
+                showPopconfirm(e.target, {
+                    message: "Are you sure you want to proceed?",
+                    onConfirm: () => {
+                        if (toast && typeof toast.show === 'function')
+                            toast.show('Action confirmed!', 'success');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
