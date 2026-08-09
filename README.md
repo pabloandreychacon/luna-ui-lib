@@ -41,8 +41,26 @@ npm install @picocss/pico
 
 ## Example
 
-Check out the [example.html](./example.html) to see the components in action. Simply open it in your browser or serve it using Vite:
+Check out the [live demo](https://pabloandreychacon.github.io/luna-ui-lib/) to see the components in action. Or run the local example:
 
 ```bash
 npx vite
 ```
+
+## Publishing to GitHub Pages
+
+To update the live demo on GitHub Pages:
+
+```bash
+# Build the library
+npm run build
+
+# Stage and commit changes
+git add example.html
+git commit -m "Update example"
+
+# Publish to gh-pages branch
+npm run publish:examples
+```
+
+The `publish:examples` script will automatically switch to the `gh-pages` branch, copy the necessary files, commit, and push to the repository.
