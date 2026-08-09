@@ -11,7 +11,7 @@
     "dev": "vite",
     "build": "vite build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publish:examples": "(git checkout gh-pages || git checkout -b gh-pages) && xcopy docs\\* . /E /Y /I && xcopy dist\\* . /E /Y /I && ren example.html index.html && git add . && (git commit -m \"Publish examples\" || echo \"No changes to commit\") && git push -f origin gh-pages"
+    "publish:examples": "git add . && (git commit -m \"Publish examples\" || echo \"No changes to commit\") && (git checkout gh-pages || git checkout -b gh-pages) && git rm -r * --ignore-unmatch && git checkout main -- docs dist example.html && ren example.html index.html && git add . && (git commit -m \"Publish examples\" || echo \"No changes to commit\") && git push -f origin gh-pages"
   },
   "keywords": [
     "ui",
