@@ -15,28 +15,118 @@
     <main class="container">
         <h1>Luna UI Lib Examples</h1>
 
+        <!-- DataTable -->
         <section>
             <h2>Data Table</h2>
-            <ui-datatable></ui-datatable>
+            <ui-datatable id="demo-table"></ui-datatable>
         </section>
 
-        <section>
-            <h2>Multiselect</h2>
-            <ui-multiselect></ui-multiselect>
-        </section>
-
+        <!-- Spinner -->
         <section>
             <h2>Spinner</h2>
-            <ui-spinner></ui-spinner>
+            <ui-spinner id="demo-spinner"></ui-spinner>
+            <button onclick="showSpinner()">Show Spinner (2s)</button>
         </section>
 
+        <!-- Floating Action Button -->
         <section>
             <h2>Floating Action Button (FAB)</h2>
             <ui-fab icon="+" position="bottom-right"></ui-fab>
-        </section>        
+        </section>
+
+        <!-- Multiselect -->
         <section>
-            <p>Note: <code>ui-toast</code> and <code>ui-popconfirm</code> typically require imperative invocation via their APIs.</p>
+            <h2>Multiselect</h2>
+            <ui-multiselect id="demo-multiselect" options='["Apple", "Banana", "Cherry", "Date", "Elderberry", "Fig"]' placeholder="Select fruits..."></ui-multiselect>
+        </section>
+
+        <!-- Toast -->
+        <section>
+            <h2>Toast</h2>
+            <ui-toast id="demo-toast"></ui-toast>
+            <button onclick="showToast('success')">Show Success Toast</button>
+            <button onclick="showToast('error')">Show Error Toast</button>
+            <button onclick="showToast('warning')">Show Warning Toast</button>
+            <button onclick="showToast('info')">Show Info Toast</button>
+        </section>
+
+        <!-- Popconfirm -->
+        <section>
+            <h2>Popconfirm</h2>
+            <button id="popconfirm-btn">Delete Item (with confirmation)</button>
         </section>
     </main>
+
+    <script type="module">
+        // Initialise components that need data
+        // No named imports needed – components are registered as custom elements
+
+        // Import popconfirm function
+        import { showPopconfirm } from './dist/luna-ui-lib.js';
+
+        // Example data for the table
+        const table = document.getElementById('demo-table');
+        if (table) {
+            table.setOptions({
+                columns: [
+                    { key: 'name', label: 'Name' },
+                    { key: 'age', label: 'Age' },
+                    { key: 'country', label: 'Country' }
+                ],
+                pageSize: 5,
+                searchable: true
+            });
+            table.setData([
+                { name: 'Alice', age: 28, country: 'USA' },
+                { name: 'Bob', age: 34, country: 'Canada' },
+                { name: 'Carlos', age: 22, country: 'Mexico' },
+                { name: 'Diana', age: 29, country: 'UK' },
+                { name: 'Eve', age: 31, country: 'France' },
+                { name: 'Frank', age: 27, country: 'Germany' },
+                { name: 'Grace', age: 35, country: 'Australia' }
+            ]);
+        }
+
+        // Spinner demo function
+        window.showSpinner = function() {
+            const spinner = document.getElementById('demo-spinner');
+            if (spinner) {
+                spinner.show();
+                setTimeout(() => spinner.hide(), 2000);
+            }
+        };
+
+        // Toast demo function
+        window.showToast = function(variant) {
+            const toast = document.getElementById('demo-toast');
+            if (toast) {
+                const messages = {
+                    success: 'Operation completed successfully!',
+                    error: 'An error occurred!',
+                    warning: 'Please check your input.',
+                    info: 'Here is some information.'
+                };
+                toast.show(messages[variant], variant);
+            }
+        };
+
+        // Popconfirm demo
+        const popconfirmBtn = document.getElementById('popconfirm-btn');
+        if (popconfirmBtn) {
+            popconfirmBtn.addEventListener('click', (e) => {
+                showPopconfirm(popconfirmBtn, {
+                    message: 'Are you sure you want to delete this item?',
+                    confirmText: 'Delete',
+                    cancelText: 'Cancel',
+                    onConfirm: () => {
+                        const toast = document.getElementById('demo-toast');
+                        if (toast) {
+                            toast.show('Item deleted successfully', 'success');
+                        }
+                    }
+                });
+            });
+        }
+    </script>
 </body>
 </html>
